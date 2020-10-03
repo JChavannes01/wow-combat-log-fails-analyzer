@@ -159,26 +159,15 @@ class SindragosaAnalyser(BaseAnalyser):
     def getFails(self, failType, minStacks=0, minTargets=1, requireDeaths=False, hideAllUM=False, attempt=-1):
         if failType == SindragosaAnalyser.FAIL_EXPLOSIONS:
             # Add lines with settings and get the explosion details.
-            lines = []
-
-            # Add header with settings.
-            lines.append('-'*49 + '\n')
-            lines.append('|' + ' '*47 + '|\n')
-            lines.append('| List of explosions for the following settings |\n')
-            lines.append('|' + ' '*47 + '|\n')
-            lines.append('-'*49 + '\n')
-            lines.append(
-                f'| Minimum Instability stacks: {minStacks:2}' + ' '*15 + ' |\n')
-            lines.append(
-                f'| Minimum number of targets: {minTargets:2}' + ' '*16 + ' |\n')
-            lines.append(
-                f'| Require deaths? {("Yes" if requireDeaths else "No"):3}' + ' '*26 + ' |\n')
-            lines.append(
-                f'| Hide UM only explosions? {("Yes" if hideAllUM else "No"):3}' + ' '*17 + ' |\n')
-            lines.append(
-                f'| Attempt: {("All" if attempt==-1 else attempt):3}' + ' '*33 + ' |\n')
-            lines.append('-'*49 + '\n')
-
+            settings = [
+                f"Minimum Instability stacks: {minStacks}",
+                f"Minimum number of targets: {minTargets}",
+                "Require deaths? " + ("Yes" if requireDeaths else "No"),
+                "Hide UM only explosions? " + ("Yes" if hideAllUM else "No"),
+                "Attempt: " + ("All" if attempt==-1 else str(attempt))
+            ]
+            title = "List of explosions for the following settings"
+            lines = self.createLogHeader(0, title, settings)
             lines.append('\n')
 
             # Add player totals

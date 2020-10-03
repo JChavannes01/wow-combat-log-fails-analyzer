@@ -50,9 +50,27 @@ class BaseAnalyser:
     def getFails(self, *args, **kwargs):
         raise NotImplementedError('Method not implemented in subclass')
 
-    def createLogHeader(self, width, description, settings):
-        #TODO: Create dynamic header implementation, see sindra analyser.
-        raise NotImplementedError('Todo: Create the nice header')
+    def createLogHeader(self, minWidth, title, settings):
+        maxContentWidth = len(title)
+        for s in settings:
+            maxContentWidth = max(maxContentWidth, len(s))
+
+        # Compensate for padding
+        width = max(minWidth, maxContentWidth+4)
+        
+        lines = []
+        lines.append('-'*width + '\n')
+        lines.append('|' + ' '*(width - 2) + '|\n')
+        lines.append(f'| {title:{width-4}} |\n')
+        lines.append('|' + ' '*(width - 2) + '|\n')
+        lines.append('-'*width + '\n')
+
+        for s in settings:
+            lines.append(f'| {s:{width-4}} |\n')
+        
+        lines.append('-'*width + '\n')
+        
+        return lines
 
 
     

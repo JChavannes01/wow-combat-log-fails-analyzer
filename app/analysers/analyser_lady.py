@@ -77,20 +77,12 @@ class LadyAnalyser(BaseAnalyser):
 
     def getFails(self, failType, minTargets=1, requireDeaths=False):
         if failType == LadyAnalyser.FAIL_SPIRITS:
-            # Add lines with settings and get the explosion details.
-            lines = []
-
-            lines.append('-'*49 + '\n')
-            lines.append('|' + ' '*47 + '|\n')
-            lines.append('| List of spirits for the following settings    |\n')
-            lines.append('|' + ' '*47 + '|\n')
-            lines.append('-'*49 + '\n')
-            lines.append(
-                f'| Minimum number of targets: {minTargets:2}' + ' '*16 + ' |\n')
-            lines.append(
-                f'| Require deaths?: {("Yes" if requireDeaths else "No"):3}' + ' '*25 + ' |\n')
-            lines.append('-'*49 + '\n')
-
+            settings = [
+                f"Minimum number of targets: {minTargets}",
+                "Require deaths? " + ("Yes" if requireDeaths else "No")
+            ]
+            title = "List of spirits for the following settings"
+            lines = self.createLogHeader(0, title, settings)
             lines.append('\n')
 
             filtered_expl = self.getExplosionsFiltered(
