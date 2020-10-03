@@ -200,10 +200,12 @@ class SindragosaAnalyser(BaseAnalyser):
                 len(self.attempts)) if attempt == -1 else [attempt]
             for i in attempt_range:
                 att = self.attempts[i]
+                explosions = self.getExplosionsFiltered(
+                    minStacks, minTargets, requireDeaths, hideAllUM, i)
                 lines.append('\n')
                 lines.append(
-                    f"Attempt {i}. {att['startTime']} - {att['endTime']}\n")
-                for expl in att["explosions"]:
+                    f"Attempt {i}, {att['startTime']} - {att['endTime']}, {len(explosions)} explosions\n")
+                for expl in explosions:
                     lines.append('\n')
                     lines.extend(expl.pprint())
 
