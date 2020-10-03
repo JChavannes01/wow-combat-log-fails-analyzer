@@ -10,6 +10,8 @@ class BaseAnalyser:
         for event in events:
             self._parseEvent(event)
 
+        self.onFinish()
+
     def _parseEvent(self, event: Event):
         if (event.EVENT_TYPE == types.SPELL_AURA_APPLIED):
             self.onSpellAuraApplied(event)
@@ -23,6 +25,9 @@ class BaseAnalyser:
             self.onSwingMissed(event)
         elif (event.EVENT_TYPE == types.SWING_DAMAGE):
             self.onSwingDamage(event)
+
+    def onFinish(self):
+        pass
 
     def onSpellAuraApplied(self, event: Event):
         pass

@@ -24,7 +24,8 @@ if __name__ == "__main__":
                              minStacks=4,
                              minTargets=1,
                              requireDeaths=False,
-                             hideAllUM=True)
+                             hideAllUM=True,
+                             attempt=-1)
     with open(OUTFILE_SINDRAGOSA, 'w') as out:
         out.writelines(outLines)
 
